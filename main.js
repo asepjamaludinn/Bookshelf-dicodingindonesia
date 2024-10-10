@@ -26,6 +26,7 @@ function addBook(title, author, year, isComplete) {
     isComplete,
   };
   books.push(book);
+
   saveBooksToStorage();
   renderBooks();
 }
@@ -147,8 +148,9 @@ bookFormSubmit.addEventListener("click", (e) => {
     title: "Buku berhasil ditambahkan!",
     text: "Buku telah berhasil ditambahkan ke daftar buku.",
     icon: "success",
+  }).then(() => {
+    bookForm.reset();
   });
-  bookForm.reset();
 });
 
 // tombol selesai dibaca
@@ -359,8 +361,19 @@ searchForm.addEventListener("submit", (e) => {
     }
   }
 });
+document.getElementById("sort-button").addEventListener("click", () => {
+  const dropdown = document.querySelector(".sort-dropdown");
+  if (dropdown.classList.contains("show")) {
+    dropdown.classList.remove("show");
+  } else {
+    dropdown.classList.add("show");
+  }
+});
+
 document.getElementById("sort-by-title").addEventListener("click", () => {
   renderBooks(books, (a, b) => a.title.localeCompare(b.title));
+  document.getElementById("sort-button").blur();
+  document.querySelector(".sort-dropdown").classList.remove("show"); // Add this line to close the dropdown
 });
 
 document.getElementById("sort-by-author").addEventListener("click", () => {
@@ -371,10 +384,19 @@ document.getElementById("sort-by-author").addEventListener("click", () => {
     if (authorA > authorB) return 1;
     return 0;
   });
+  document.getElementById("sort-button").blur();
+  document.querySelector(".sort-dropdown").classList.remove("show"); // Add this line to close the dropdown
 });
 
 document.getElementById("sort-by-year").addEventListener("click", () => {
   renderBooks(books, (a, b) => a.year - b.year);
+  document.getElementById("sort-button").blur();
+  document.querySelector(".sort-dropdown").classList.remove("show"); // Add this line to close the dropdown
+});
+document.querySelector(".sort-dropdown").addEventListener("click", (e) => {
+  if (e.target.tagName === "A") {
+    document.querySelector(".sort-dropdown").classList.remove("show");
+  }
 });
 
 // Inisialisasi aplikasi
