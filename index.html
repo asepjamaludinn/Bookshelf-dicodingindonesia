@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asep Jamaludin | Dicoding Indonesia</title>
+
+    <!-- Css -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Box Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.1.2/css/boxicons.min.css"
+    />
+
+    <script defer src="main.js"></script>
+  </head>
+  <body>
+    <header>
+      <img src="assets/buku.png" alt="Bookshelf App Logo" class="logo" />
+      <h1 class="heading">Bookshelf App</h1>
+    </header>
+    <main>
+      <section>
+        <h2>Tambah Buku Baru</h2>
+        <form data-testid="bookForm">
+          <div>
+            <label for="bookFormTitle">Judul</label>
+            <input
+              id="bookFormTitle"
+              type="text"
+              required
+              data-testid="bookFormTitleInput"
+              placeholder="Judul"
+            />
+          </div>
+          <div>
+            <label for="bookFormAuthor">Penulis</label>
+            <input
+              id="bookFormAuthor"
+              type="text"
+              required
+              data-testid="bookFormAuthorInput"
+              placeholder="Penulis"
+            />
+          </div>
+          <div>
+            <label for="bookFormYear">Tahun</label>
+            <input
+              id="bookFormYear"
+              type="number"
+              required
+              data-testid="bookFormYearInput"
+              placeholder="Tahun"
+            />
+          </div>
+          <div class="cheklist">
+            <label for="bookFormIsComplete">Selesai dibaca</label>
+            <input
+              id="bookFormIsComplete"
+              type="checkbox"
+              data-testid="bookFormIsCompleteCheckbox"
+            />
+          </div>
+          <button
+            id="bookFormSubmit"
+            type="submit"
+            data-testid="bookFormSubmitButton"
+          >
+            Masukkan Buku ke rak?
+            <span>Belum selesai dibaca</span>
+          </button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Cari Buku</h2>
+        <form id="searchBook" data-testid="searchBookForm">
+          <label for="searchBookTitle">Judul</label>
+          <input
+            id="searchBookTitle"
+            type="text"
+            data-testid="searchBookFormTitleInput"
+            placeholder="Masukkan Judul"
+          />
+          <button
+            id="searchSubmit"
+            type="submit"
+            data-testid="searchBookFormSubmitButton"
+          >
+            Cari
+          </button>
+        </form>
+      </section>
+
+      <section>
+        <div class="sort-button">
+          <button id="sort-button" data-testid="sort-button">
+            <i class="bx bx-sort-alt"></i>
+            Urutkan
+          </button>
+          <div class="sort-dropdown">
+            <button id="sort-by-title" data-testid="sort-by-title">
+              Judul
+            </button>
+            <button id="sort-by-author" data-testid="sort-by-author">
+              Penulis
+            </button>
+            <button id="sort-by-year" data-testid="sort-by-year">Tahun</button>
+          </div>
+        </div>
+        <h2>Belum selesai dibaca</h2>
+        <div id="incompleteBookList" data-testid="incompleteBookList">
+          <!-- 
+            Ini adalah struktur HTML untuk masing-masing buku.
+            Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
+          -->
+          <div class="book-item" data-bookid="123123123" data-testid="bookItem">
+            <h3 data-testid="bookItemTitle">Judul Buku 1</h3>
+            <div class="book-info">
+              <p class="title" data-testid="bookItemTitle">Judul Buku 1</p>
+              <p class="author" data-testid="bookItemAuthor">
+                Penulis: Penulis Buku 1
+              </p>
+              <p class="year" data-testid="bookItemYear">Tahun: 2030</p>
+            </div>
+            <div class="book-actions">
+              <button data-testid="bookItemIsCompleteButton">
+                Selesai dibaca
+              </button>
+              <button data-testid="bookItemDeleteButton">Hapus Buku</button>
+              <button data-testid="bookItemEditButton">Edit Buku</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Selesai dibaca</h2>
+
+        <div id="completeBookList" data-testid="completeBookList">
+          <!-- 
+            Ini adalah struktur HTML untuk masing-masing buku.
+            Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
+          -->
+          <div class="book-item" data-bookid="456456456" data-testid="bookItem">
+            <h3 data-testid="bookItemTitle">Judul Buku 2</h3>
+            <div class="book-info">
+              <p class="title" data-testid="bookItemTitle">Judul Buku 2</p>
+              <p class="author" data-testid="bookItemAuthor">
+                Penulis: Penulis Buku 2
+              </p>
+              <p class="year" data-testid="bookItemYear">Tahun: 2030</p>
+            </div>
+            <div class="book-actions">
+              <button data-testid="bookItemIsCompleteButton">
+                Selesai dibaca
+              </button>
+              <button data-testid="bookItemDeleteButton">Hapus Buku</button>
+              <button data-testid="bookItemEditButton">Edit Buku</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="editBookModal" class="modal">
+        <div class="modal-content">
+          <h2>Edit Buku</h2>
+          <form id="editBookForm">
+            <div>
+              <label for="editBookId">Identitas Buku</label>
+              <input id="editBookId" type="hidden" />
+            </div>
+            <div>
+              <label for="editBookTitle">Judul</label>
+              <input id="editBookTitle" type="text" required />
+            </div>
+            <div>
+              <label for="editBookAuthor">Penulis</label>
+              <input id="editBookAuthor" type="text" required />
+            </div>
+            <div>
+              <label for="editBookYear">Tahun</label>
+              <input id="editBookYear" type="number" required />
+            </div>
+
+            <button id="editBookSubmit" type="submit">Simpan Perubahan</button>
+            <button id="editBookCancel" type="button">Batal</button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <a href="https://instagram.com/_jmldnnn"
+          ><i class="bx bxl-instagram"></i
+        ></a>
+        <a href="https://www.linkedin.com/in/asep-jamaludin-061565294/"
+          ><i class="bx bxl-linkedin"></i
+        ></a>
+        <a href="https://github.com/asepjamaludinn"
+          ><i class="bx bxl-github"></i
+        ></a>
+      </div>
+      <p>Copyright &copy; 2024 Bookshelf App</p>
+      <p>Created by Asep Jamaludin</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.all.min.js"></script>
+  </body>
+</html>
